@@ -32,6 +32,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.textView1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                apply1();
+            }
+        });
+
+        findViewById(R.id.textView2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                apply2();
+
+            }
+        });
     }
 
     private void apply() {
@@ -48,11 +62,36 @@ public class MainActivity extends AppCompatActivity {
                         Log.e(TAG, Arrays.toString(permissions));
                     }
                 })
+                .setKeyBackListener(new OKPermissionManager.OKPermissionKeyBackListener() {
+                    @Override
+                    public void onKeyBackListener() {
+                        Log.e(TAG,"OKPermissionKeyBackListener");
+
+                    }
+                })
                 .setShowDialog(true)
                 .setDialogTitle("开启App")
                 .setDialogMsg("为了能够正常使用，需要开启以下权限")
                 .builder();
         okPermissionManager.applyPermission(mContext);
+    }
+
+    private void apply1() {
+        OKPermissionManager.applyPermissionNoDialog(mContext, new String[]{Manifest.permission.READ_PHONE_STATE}, new OKPermissionManager.OKPermissionListener() {
+            @Override
+            public void onOKPermission(@NonNull String[] permissions, @NonNull int[] grantResults) {
+
+            }
+        });
+    }
+
+    private void apply2() {
+        OKPermissionManager.applyPermissionNoDialog(mContext, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA}, new OKPermissionManager.OKPermissionListener() {
+            @Override
+            public void onOKPermission(@NonNull String[] permissions, @NonNull int[] grantResults) {
+
+            }
+        });
     }
 
 }

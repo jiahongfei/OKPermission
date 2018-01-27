@@ -1,12 +1,15 @@
 package com.andrjhf.okpermission;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.andrjhf.okpermission.OKPermissionActivity.INTENT_KEY_DIALOG_ITEMS;
 import static com.andrjhf.okpermission.OKPermissionActivity.INTENT_KEY_DIALOG_MSG;
@@ -39,8 +42,13 @@ public class OKPermissionManager {
         void onOKPermission(@NonNull String[] permissions, @NonNull int[] grantResults);
     }
 
+    public interface OKPermissionKeyBackListener{
+        void onKeyBackListener();
+    }
+
     private Bundle mBundle = new Bundle();
     private OKPermissionListener mOKPermissionListener;
+    private OKPermissionKeyBackListener mKeyBackListener;
 
     private OKPermissionManager(Builder builder) {
         mBundle.putStringArray(INTENT_KEY_MULTIPLE_PERMISSIONS, builder.mPermissions);
@@ -52,6 +60,7 @@ public class OKPermissionManager {
         mBundle.putSerializable(INTENT_KEY_DIALOG_ITEMS, builder.mDialogItems);
 
         mOKPermissionListener = builder.mOKPermissionListener;
+        mKeyBackListener = builder.mKeyBackListener;
     }
 
     /**
@@ -61,6 +70,7 @@ public class OKPermissionManager {
      */
     public void applyPermission(Context context) {
         OKPermissionActivity.setOKPermissionListener(mOKPermissionListener);
+        OKPermissionActivity.setKeyBackListener(mKeyBackListener);
         Intent intent = new Intent(context, OKPermissionActivity.class);
         intent.putExtras(mBundle);
         context.startActivity(intent);
@@ -74,6 +84,7 @@ public class OKPermissionManager {
         private ArrayList<PermissionItem> mDialogItems;
         private boolean mShowDialog = false;
         private OKPermissionListener mOKPermissionListener;
+        private OKPermissionKeyBackListener mKeyBackListener;
 
         public Builder(PermissionItem[] permissions) {
             mPermissions = new String[permissions.length];
@@ -104,9 +115,35 @@ public class OKPermissionManager {
             return this;
         }
 
+        public Builder setKeyBackListener(OKPermissionKeyBackListener keyBackListener){
+            mKeyBackListener = keyBackListener;
+            return this;
+        }
+
         public OKPermissionManager builder() {
             return new OKPermissionManager(this);
         }
     }
+
+    /**
+     * 申请权限快捷方法，申请权限不弹出对话框
+     * @param context
+     * @param permissions
+     * @param permissionListener
+     */
+    public static void applyPermissionNoDialog(Context context, String[] permissions,OKPermissionListener permissionListener){
+        OKPermissionManager.PermissionItem[] permissionItems = new OKPermissionManager.PermissionItem[permissions.length];
+        for (int i = 0; i<permissions.length; i++){
+            permissionItems[i] = new PermissionItem(permissions[i],"",0);
+        }
+        OKPermissionManager okPermissionManager = new OKPermissionManager
+                .Builder(permissionItems)
+                .setOKPermissionListener(permissionListener)
+                .setShowDialog(false)
+                .builder();
+        okPermissionManager.applyPermission(context);
+    }
+
+
 
 }

@@ -16,7 +16,7 @@ import java.util.List;
  * @desc :
  */
 
-public class OKPermissionAdapter extends RecyclerView.Adapter {
+class OKPermissionAdapter extends RecyclerView.Adapter {
 
     private List<String> mPermissionNames;
     private List<OKPermissionManager.PermissionItem> mDialogItems;
