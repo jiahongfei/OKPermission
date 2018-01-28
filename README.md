@@ -7,6 +7,7 @@ Android 6.0 申请权限，支持权限说明对话框，单个申请、多个�
 
 ### OKPermission
 这是一个申请权限的开源库。
+
 开源库支持：弹出权限说明对话框，单个、多个权限申请。
 #### OKPermission对外暴露的类
 ```
@@ -56,8 +57,9 @@ interface OKPermissionKeyBackListener
         okPermissionManager.applyPermission(mContext);
 ```
 上面那段代码对应如下图片
+
 ![申请权限.gif](https://github.com/jiahongfei/OKPermission/tree/master/Screenshot/申请权限.gif)
-####快速申请权限
+#### 快速申请权限
 ```
 //这种方式可申请一个权限也可以申请多个权限
  OKPermissionManager.applyPermissionNoDialog(mContext, new String[]{Manifest.permission.READ_PHONE_STATE}, new OKPermissionListener() {
@@ -68,4 +70,5 @@ interface OKPermissionKeyBackListener
         });
 ```
 如下图片：
+
 ![快速申请权限.gif](https://github.com/jiahongfei/OKPermission/tree/master/Screenshot/快速申请权限.gif)
