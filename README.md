@@ -58,7 +58,7 @@ interface OKPermissionKeyBackListener
 ```
 上面那段代码对应如下图片
 
-![申请权限.gif](https://github.com/jiahongfei/OKPermission/tree/master/Screenshot/申请权限.gif)
+![申请权限.gif](https://github.com/jiahongfei/OKPermission/blob/master/Screenshot/%E7%94%B3%E8%AF%B7%E6%9D%83%E9%99%90.gif)
 #### 快速申请权限
 ```
 //这种方式可申请一个权限也可以申请多个权限
@@ -71,4 +71,4 @@ interface OKPermissionKeyBackListener
 ```
 如下图片：
 
-![快速申请权限.gif](https://github.com/jiahongfei/OKPermission/tree/master/Screenshot/快速申请权限.gif)
+![快速申请权限.gif](https://github.com/jiahongfei/OKPermission/blob/master/Screenshot/%E5%BF%AB%E9%80%9F%E7%94%B3%E8%AF%B7%E6%9D%83%E9%99%90.gif)
