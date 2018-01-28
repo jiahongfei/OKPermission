@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.andrjhf.okpermission.OKPermissionKeyBackListener;
+import com.andrjhf.okpermission.OKPermissionListener;
 import com.andrjhf.okpermission.OKPermissionManager;
+import com.andrjhf.okpermission.PermissionItem;
 
 import java.util.Arrays;
 
@@ -49,20 +52,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void apply() {
-        OKPermissionManager.PermissionItem[] permissionItems = new OKPermissionManager.PermissionItem[]{
-                new OKPermissionManager.PermissionItem(Manifest.permission.READ_PHONE_STATE, "手机状态", R.mipmap.ic_launcher),
-                new OKPermissionManager.PermissionItem(Manifest.permission.CAMERA, "照相机", R.mipmap.ic_launcher),
-                new OKPermissionManager.PermissionItem(Manifest.permission.ACCESS_FINE_LOCATION, "位置信息2", R.mipmap.ic_launcher)};
+        PermissionItem[] permissionItems = new PermissionItem[]{
+                new PermissionItem(Manifest.permission.READ_PHONE_STATE, "手机状态", R.mipmap.ic_launcher),
+                new PermissionItem(Manifest.permission.CAMERA, "照相机", R.mipmap.ic_launcher),
+                new PermissionItem(Manifest.permission.ACCESS_FINE_LOCATION, "位置信息2", R.mipmap.ic_launcher)};
 
         OKPermissionManager okPermissionManager = new OKPermissionManager
                 .Builder(permissionItems)
-                .setOKPermissionListener(new OKPermissionManager.OKPermissionListener() {
+                .setOKPermissionListener(new OKPermissionListener() {
                     @Override
                     public void onOKPermission(@NonNull String[] permissions, @NonNull int[] grantResults) {
                         Log.e(TAG, Arrays.toString(permissions));
                     }
                 })
-                .setKeyBackListener(new OKPermissionManager.OKPermissionKeyBackListener() {
+                .setKeyBackListener(new OKPermissionKeyBackListener() {
                     @Override
                     public void onKeyBackListener() {
                         Log.e(TAG,"OKPermissionKeyBackListener");
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void apply1() {
-        OKPermissionManager.applyPermissionNoDialog(mContext, new String[]{Manifest.permission.READ_PHONE_STATE}, new OKPermissionManager.OKPermissionListener() {
+        OKPermissionManager.applyPermissionNoDialog(mContext, new String[]{Manifest.permission.READ_PHONE_STATE}, new OKPermissionListener() {
             @Override
             public void onOKPermission(@NonNull String[] permissions, @NonNull int[] grantResults) {
 
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void apply2() {
-        OKPermissionManager.applyPermissionNoDialog(mContext, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA}, new OKPermissionManager.OKPermissionListener() {
+        OKPermissionManager.applyPermissionNoDialog(mContext, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA}, new OKPermissionListener() {
             @Override
             public void onOKPermission(@NonNull String[] permissions, @NonNull int[] grantResults) {
 

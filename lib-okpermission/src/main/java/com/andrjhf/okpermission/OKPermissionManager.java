@@ -1,15 +1,10 @@
 package com.andrjhf.okpermission;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.andrjhf.okpermission.OKPermissionActivity.INTENT_KEY_DIALOG_ITEMS;
 import static com.andrjhf.okpermission.OKPermissionActivity.INTENT_KEY_DIALOG_MSG;
@@ -21,30 +16,10 @@ import static com.andrjhf.okpermission.OKPermissionActivity.INTENT_KEY_SHOW_DIAL
  * @author :  jiahongfei
  * @email : jiahongfeinew@163.com
  * @date : 2018/1/18
- * @desc :
+ * @desc : OKPermission的管理类，用于申请权限、配置各种参数
  */
 
 public class OKPermissionManager {
-
-    public static class PermissionItem implements Serializable {
-        public final String permission;
-        public final int imageId;
-        public final String name;
-
-        public PermissionItem(String permission, String name, int imageId) {
-            this.permission = permission;
-            this.imageId = imageId;
-            this.name = name;
-        }
-    }
-
-    public interface OKPermissionListener {
-        void onOKPermission(@NonNull String[] permissions, @NonNull int[] grantResults);
-    }
-
-    public interface OKPermissionKeyBackListener{
-        void onKeyBackListener();
-    }
 
     private Bundle mBundle = new Bundle();
     private OKPermissionListener mOKPermissionListener;
@@ -132,7 +107,7 @@ public class OKPermissionManager {
      * @param permissionListener
      */
     public static void applyPermissionNoDialog(Context context, String[] permissions,OKPermissionListener permissionListener){
-        OKPermissionManager.PermissionItem[] permissionItems = new OKPermissionManager.PermissionItem[permissions.length];
+        PermissionItem[] permissionItems = new PermissionItem[permissions.length];
         for (int i = 0; i<permissions.length; i++){
             permissionItems[i] = new PermissionItem(permissions[i],"",0);
         }

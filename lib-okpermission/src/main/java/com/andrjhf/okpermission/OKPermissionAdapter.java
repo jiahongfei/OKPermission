@@ -19,10 +19,10 @@ import java.util.List;
 class OKPermissionAdapter extends RecyclerView.Adapter {
 
     private List<String> mPermissionNames;
-    private List<OKPermissionManager.PermissionItem> mDialogItems;
+    private List<PermissionItem> mDialogItems;
     private View.OnClickListener mOnClickListener;
 
-    public OKPermissionAdapter(List<String> requestPermission, List<OKPermissionManager.PermissionItem> dialogItems){
+    public OKPermissionAdapter(List<String> requestPermission, List<PermissionItem> dialogItems){
         mPermissionNames = requestPermission;
         mDialogItems = dialogItems;
     }
@@ -36,7 +36,7 @@ class OKPermissionAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
 
-        OKPermissionManager.PermissionItem dialogItem = getDialogItem(mPermissionNames.get(position));
+        PermissionItem dialogItem = getDialogItem(mPermissionNames.get(position));
         if(null == dialogItem){
             return ;
         }
@@ -74,8 +74,8 @@ class OKPermissionAdapter extends RecyclerView.Adapter {
         mOnClickListener = onClickListener;
     }
 
-    private OKPermissionManager.PermissionItem getDialogItem(String keyPermission){
-        for (OKPermissionManager.PermissionItem dialogItem : mDialogItems){
+    private PermissionItem getDialogItem(String keyPermission){
+        for (PermissionItem dialogItem : mDialogItems){
             if(dialogItem.permission.equals(keyPermission)){
                 return dialogItem;
             }

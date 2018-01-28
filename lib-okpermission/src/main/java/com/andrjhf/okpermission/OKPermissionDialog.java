@@ -72,7 +72,7 @@ class OKPermissionDialog extends Dialog {
         textView.setText(message);
     }
 
-    public void setRecyclerView(List<String> requestPermission, List<OKPermissionManager.PermissionItem> dialogItems) {
+    public void setRecyclerView(List<String> requestPermission, List<PermissionItem> dialogItems) {
         int spanCount = 3;
         if (requestPermission.size() <= 3) {
             spanCount = requestPermission.size();

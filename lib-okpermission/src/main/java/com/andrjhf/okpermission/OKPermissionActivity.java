@@ -3,12 +3,9 @@ package com.andrjhf.okpermission;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 
@@ -25,8 +22,8 @@ public class OKPermissionActivity extends Activity {
 
     private static final String TAG = "OKPermissionActivity";
 
-    private static OKPermissionManager.OKPermissionListener sOKPermissionListener;
-    private static OKPermissionManager.OKPermissionKeyBackListener sKeyBackListener;
+    private static OKPermissionListener sOKPermissionListener;
+    private static OKPermissionKeyBackListener sKeyBackListener;
 
     /**
      * 多个权限
@@ -55,15 +52,15 @@ public class OKPermissionActivity extends Activity {
     private String[] mPermissions;
     private String mDialogTitle;
     private String mDialogMsg;
-    private ArrayList<OKPermissionManager.PermissionItem> mDialogItems = new ArrayList<>();
+    private ArrayList<PermissionItem> mDialogItems = new ArrayList<>();
     private boolean mShowDialog;
     private Dialog mDialog = null;
 
-    public static void setOKPermissionListener(OKPermissionManager.OKPermissionListener okPermissionListener) {
+    public static void setOKPermissionListener(OKPermissionListener okPermissionListener) {
         sOKPermissionListener = okPermissionListener;
     }
 
-    public static void setKeyBackListener(OKPermissionManager.OKPermissionKeyBackListener keyBackListener) {
+    public static void setKeyBackListener(OKPermissionKeyBackListener keyBackListener) {
         sKeyBackListener = keyBackListener;
     }
 
@@ -88,7 +85,7 @@ public class OKPermissionActivity extends Activity {
         mPermissions = bundle.getStringArray(INTENT_KEY_MULTIPLE_PERMISSIONS);
         mDialogTitle = bundle.getString(INTENT_KEY_DIALOG_TITLE, null);
         mDialogMsg = bundle.getString(INTENT_KEY_DIALOG_MSG, null);
-        mDialogItems = (ArrayList<OKPermissionManager.PermissionItem>) bundle.getSerializable(INTENT_KEY_DIALOG_ITEMS);
+        mDialogItems = (ArrayList<PermissionItem>) bundle.getSerializable(INTENT_KEY_DIALOG_ITEMS);
         mShowDialog = bundle.getBoolean(INTENT_KEY_SHOW_DIALOG, false);
     }
 
